@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Human Performance | E-Learning by Alni Nur Firani</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5A623;
+    --navy: #1A1F6E;
+    --blue: #2D3ECC;
+    --light-blue: #5B9BD5;
+    --white: #FFFFFF;
+    --off-white: #F8F8FC;
+    --gray: #6B7280;
+    --light-gray: #F1F2F8;
+    --success: #10B981;
+    --danger: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    background: var(--white);
+    color: #1a1a2e;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+
+  p { font-size: 1rem; line-height: 1.8; color: #374151; font-weight: 400; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 3px solid var(--gold);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 66px;
+    box-shadow: 0 2px 20px rgba(26,31,110,0.07);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.9rem; font-weight: 600; transition: color .2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy); color: white; border: none; padding: .55rem 1.3rem;
+    border-radius: 8px; font-size: .9rem; font-weight: 700; cursor: pointer;
+    font-family: 'Nunito', sans-serif; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--blue); }
+
+  /* ── BANNER CREDIT ── */
+  .credit-bar {
+    background: var(--gold); color: var(--navy); text-align: center;
+    padding: .45rem 1rem; font-size: .82rem; font-weight: 700;
+    letter-spacing: .03em; position: fixed; top: 66px; left: 0; right: 0; z-index: 99;
+  }
+  .credit-bar a { color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 9rem 5rem 5rem;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -50px; left: 20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(45,62,204,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.35);
+    color: var(--gold); padding: .45rem 1.1rem; border-radius: 50px;
+    font-size: .85rem; font-weight: 700; margin-bottom: 1.75rem;
+    animation: fadeUp .6s ease both;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800; color: white; line-height: 1.15;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .6s ease .1s both;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-lead {
+    color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.8;
+    margin-bottom: 2rem; font-weight: 400;
+    animation: fadeUp .6s ease .2s both;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .6s ease .3s both; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); padding: .9rem 2rem;
+    border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
+    border: none; font-family: 'Nunito', sans-serif; transition: transform .2s, box-shadow .2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.4); }
+  .btn-outline {
+    background: transparent; color: white; padding: .9rem 2rem;
+    border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.3); font-family: 'Nunito', sans-serif;
+    transition: border-color .2s, background .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.06); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3rem;
+    animation: fadeUp .6s ease .4s both;
+  }
+  .stat-item { color: white; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: .82rem; color: rgba(255,255,255,0.5); margin-top: .2rem; }
+  .hero-visual {
+    position: absolute; right: 5rem; top: 50%; transform: translateY(-50%);
+    width: 360px; z-index: 2;
+    animation: fadeUp .8s ease .3s both;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 1.75rem; backdrop-filter: blur(8px);
+  }
+  .hero-card-title { font-family: 'Syne', sans-serif; color: white; font-weight: 700; font-size: 1rem; margin-bottom: 1.25rem; }
+  .progress-item { margin-bottom: 1rem; }
+  .progress-label { display: flex; justify-content: space-between; margin-bottom: .4rem; font-size: .82rem; color: rgba(255,255,255,0.7); font-weight: 600; }
+  .progress-bar { height: 7px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; background: var(--gold); }
+  .progress-fill.blue { background: var(--light-blue); }
+  .progress-fill.green { background: #34D399; }
+
+  /* ── FOR WHO OPENING SECTION ── */
+  .for-who {
+    background: linear-gradient(135deg, #f0f4ff 0%, #fff8ec 100%);
+    padding: 4rem 5rem;
+    border-bottom: 2px solid rgba(245,166,35,0.2);
+  }
+  .for-who-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .for-who-label {
+    font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: .75rem;
+  }
+  .for-who h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800;
+    color: var(--navy); margin-bottom: 1.25rem; line-height: 1.25;
+  }
+  .for-who-desc {
+    font-size: 1.05rem; color: #374151; line-height: 1.8; max-width: 700px;
+    margin: 0 auto 2rem; font-weight: 400;
+  }
+  .audience-chips { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .chip {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: white; border: 2px solid rgba(26,31,110,0.12);
+    padding: .55rem 1.2rem; border-radius: 50px;
+    font-size: .88rem; font-weight: 700; color: var(--navy);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .how-to-use {
+    background: white; border-radius: 16px; padding: 1.75rem 2rem;
+    border-left: 5px solid var(--gold);
+    text-align: left; max-width: 700px; margin: 0 auto;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .how-to-use h4 { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--navy); margin-bottom: .75rem; font-size: 1rem; }
+  .how-to-use ol { padding-left: 1.25rem; }
+  .how-to-use ol li { font-size: .92rem; color: #374151; line-height: 1.75; font-weight: 500; padding: .2rem 0; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 5rem 5rem; }
+  .section-label {
+    font-size: .75rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: .5rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-desc { color: #6B7280; font-size: 1rem; line-height: 1.8; max-width: 620px; font-weight: 400; }
+  .section-header { margin-bottom: 3rem; }
+
+  /* ── WHAT IS ── */
+  .what-is { background: var(--off-white); }
+  .definition-box {
+    background: white; border-radius: 16px; padding: 2.5rem;
+    border-left: 6px solid var(--gold);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    max-width: 820px; margin-bottom: 3rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .def-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .def-text { font-size: 1.05rem; line-height: 1.85; color: #1f2937; font-weight: 400; }
+  .def-text strong { color: var(--navy); }
+  .transform-flow {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 1.25rem; align-items: center; max-width: 680px;
+  }
+  .flow-card {
+    background: white; border-radius: 14px; padding: 1.75rem;
+    text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .flow-card.before { border-top: 4px solid var(--danger); }
+  .flow-card.after { border-top: 4px solid var(--success); }
+  .flow-emoji { font-size: 2.5rem; margin-bottom: .5rem; }
+  .flow-card h3 { font-weight: 800; font-size: 1rem; }
+  .flow-card.before h3 { color: var(--danger); }
+  .flow-card.after h3 { color: var(--success); }
+  .flow-card p { font-size: .88rem; color: var(--gray); margin-top: .3rem; }
+  .flow-arrow { font-size: 2.5rem; color: var(--gold); text-align: center; }
+
+  /* ── PILLARS ── */
+  .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .pillar-card {
+    background: white; border-radius: 16px; padding: 2.25rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border-bottom: 4px solid transparent;
+    transition: transform .3s, box-shadow .3s;
+    position: relative; overflow: hidden;
+  }
+  .pillar-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.11); }
+  .pillar-card:nth-child(1) { border-color: var(--gold); }
+  .pillar-card:nth-child(2) { border-color: var(--blue); }
+  .pillar-card:nth-child(3) { border-color: var(--success); }
+  .pillar-card:nth-child(4) { border-color: var(--light-blue); }
+  .pillar-num {
+    position: absolute; top: -10px; right: 1rem;
+    font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800;
+    color: rgba(0,0,0,0.04); line-height: 1;
+  }
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pillar-card h3 { font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: .6rem; }
+  .pillar-card p { font-size: .9rem; color: #6B7280; line-height: 1.7; font-weight: 400; }
+
+  /* ── HPT MODEL ── */
+  .hpt { background: var(--navy); color: white; }
+  .hpt .section-title { color: white; }
+  .hpt .section-desc { color: rgba(255,255,255,0.65); }
+  .hpt-diagram {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem; margin-bottom: 2rem;
+  }
+  .hpt-phase {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 1.8rem;
+    transition: background .3s;
+  }
+  .hpt-phase:hover { background: rgba(255,255,255,0.08); }
+  .hpt-phase-label {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem;
+  }
+  .phase-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .hpt-phase ul { list-style: none; padding: 0; }
+  .hpt-phase ul li {
+    padding: .45rem 0; font-size: .9rem; color: rgba(255,255,255,0.72);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: flex-start; gap: .5rem; line-height: 1.6;
+  }
+  .hpt-phase ul li::before { content: '→'; color: var(--gold); font-size: .78rem; margin-top: .2rem; flex-shrink: 0; }
+  .hpt-eval {
+    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 16px; padding: 1.6rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .hpt-eval-icon { font-size: 2.5rem; }
+  .hpt-eval-content h4 { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--gold); margin-bottom: .4rem; }
+  .hpt-eval-content p { font-size: .9rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+  .hpt-eval-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
+  .tag {
+    background: rgba(245,166,35,0.15); color: var(--gold);
+    padding: .25rem .8rem; border-radius: 50px; font-size: .78rem; font-weight: 700;
+  }
+
+  /* ── GILBERT ── */
+  .gilbert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .gilbert-card {
+    background: white; border-radius: 16px; padding: 2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+    align-items: start; transition: transform .3s;
+  }
+  .gilbert-card:hover { transform: translateY(-4px); }
+  .gilbert-icon-wrap {
+    width: 60px; height: 60px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; flex-shrink: 0;
+  }
+  .gilbert-card:nth-child(1) .gilbert-icon-wrap { background: rgba(245,166,35,0.1); }
+  .gilbert-card:nth-child(2) .gilbert-icon-wrap { background: rgba(45,62,204,0.08); }
+  .gilbert-card:nth-child(3) .gilbert-icon-wrap { background: rgba(16,185,129,0.1); }
+  .gilbert-card:nth-child(4) .gilbert-icon-wrap { background: rgba(91,155,213,0.1); }
+  .gilbert-title { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--navy); margin-bottom: .35rem; font-size: 1.05rem; }
+  .gilbert-concept { font-size: .9rem; color: #6B7280; line-height: 1.7; margin-bottom: .85rem; font-weight: 400; }
+  .intervention-label {
+    font-size: .72rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--blue); margin-bottom: .35rem;
+  }
+  .intervention-text {
+    font-size: .9rem; background: var(--light-gray); border-radius: 8px;
+    padding: .65rem 1rem; color: var(--navy); line-height: 1.65;
+    border-left: 3px solid var(--gold); font-weight: 500;
+  }
+
+  /* ── CASE STUDY ── */
+  .case-study { background: var(--off-white); }
+  .case-tabs { display: flex; gap: .5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .case-tab {
+    padding: .65rem 1.4rem; border-radius: 50px; font-size: .88rem;
+    font-weight: 700; cursor: pointer; border: 2px solid transparent;
+    transition: all .2s; font-family: 'Nunito', sans-serif;
+    background: white; color: var(--gray);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .case-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+  .case-content { display: none; }
+  .case-content.active { display: block; animation: fadeUp .4s ease; }
+  .case-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  .case-box {
+    background: white; border-radius: 16px; padding: 2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .case-box h4 {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+    color: var(--navy); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem;
+  }
+  .case-box ul { list-style: none; padding: 0; }
+  .case-box ul li {
+    padding: .55rem 0; border-bottom: 1px solid var(--light-gray);
+    font-size: .9rem; color: #374151; display: flex; gap: .75rem; align-items: flex-start;
+    line-height: 1.65; font-weight: 400;
+  }
+  .case-box ul li:last-child { border-bottom: none; }
+  .li-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+  .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .outcome-item {
+    background: var(--light-gray); border-radius: 10px; padding: 1rem;
+    text-align: center;
+  }
+  .outcome-num { font-family: 'Syne', sans-serif; font-size: 1.65rem; font-weight: 800; color: var(--navy); }
+  .outcome-desc { font-size: .78rem; color: var(--gray); margin-top: .2rem; }
+  .case-highlight {
+    grid-column: 1 / -1; background: var(--navy); border-radius: 16px;
+    padding: 1.5rem 2rem; display: flex; gap: 1rem; align-items: center;
+  }
+  .case-highlight p { color: rgba(255,255,255,0.85); font-size: .92rem; line-height: 1.75; font-weight: 400; }
+  .case-highlight-icon { font-size: 2rem; flex-shrink: 0; }
+
+  /* ── E-LEARNING QUIZ ── */
+  .elearning { background: white; }
+  .quiz-container {
+    max-width: 820px; margin: 0 auto;
+    background: white; border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  .quiz-header {
+    background: var(--navy); padding: 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .quiz-header h3 { font-family: 'Syne', sans-serif; color: white; font-weight: 800; font-size: 1.1rem; }
+  .quiz-progress-wrap { display: flex; align-items: center; gap: .75rem; }
+  .quiz-progress-text { color: rgba(255,255,255,0.6); font-size: .82rem; font-weight: 600; }
+  .quiz-bar { width: 120px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; overflow: hidden; }
+  .quiz-bar-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width .4s ease; }
+  .quiz-body { padding: 2.5rem; }
+  .quiz-q-num { font-size: .75rem; font-weight: 800; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; margin-bottom: .75rem; }
+  .quiz-question { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 2rem; line-height: 1.5; }
+  .quiz-options { display: grid; gap: .8rem; }
+  .quiz-option {
+    padding: 1.05rem 1.3rem; border-radius: 12px; border: 2px solid var(--light-gray);
+    cursor: pointer; font-size: .92rem; transition: all .2s;
+    background: white; text-align: left; font-family: 'Nunito', sans-serif;
+    display: flex; align-items: center; gap: .8rem; line-height: 1.55; font-weight: 500;
+  }
+  .quiz-option:hover:not(.disabled) { border-color: var(--blue); background: rgba(45,62,204,0.03); }
+  .quiz-option.correct { border-color: var(--success); background: rgba(16,185,129,0.08); color: #065f46; }
+  .quiz-option.wrong { border-color: var(--danger); background: rgba(239,68,68,0.06); color: #991b1b; }
+  .quiz-option.disabled { cursor: default; }
+  .opt-letter {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--light-gray); font-size: .78rem; font-weight: 800;
+    color: var(--gray); flex-shrink: 0; transition: all .2s;
+  }
+  .quiz-option.correct .opt-letter { background: var(--success); color: white; }
+  .quiz-option.wrong .opt-letter { background: var(--danger); color: white; }
+  .quiz-feedback {
+    margin-top: 1.5rem; padding: 1.1rem 1.3rem; border-radius: 10px;
+    font-size: .9rem; line-height: 1.7; display: none; font-weight: 500;
+  }
+  .quiz-feedback.correct { background: rgba(16,185,129,0.09); color: #065f46; border: 1px solid rgba(16,185,129,0.2); display: block; }
+  .quiz-feedback.wrong { background: rgba(239,68,68,0.07); color: #991b1b; border: 1px solid rgba(239,68,68,0.15); display: block; }
+  .quiz-footer { padding: 1.5rem 2.5rem; border-top: 1px solid var(--light-gray); display: flex; justify-content: space-between; align-items: center; }
+  .score-badge { background: var(--light-gray); padding: .4rem 1rem; border-radius: 50px; font-size: .82rem; font-weight: 700; color: var(--navy); }
+  .quiz-nav { display: flex; gap: .75rem; }
+  .btn-quiz {
+    background: var(--navy); color: white; padding: .65rem 1.5rem;
+    border-radius: 8px; font-size: .88rem; font-weight: 700; cursor: pointer;
+    border: none; font-family: 'Nunito', sans-serif; transition: background .2s;
+  }
+  .btn-quiz:hover { background: var(--blue); }
+  .btn-quiz.ghost { background: transparent; color: var(--navy); border: 2px solid var(--light-gray); }
+  .btn-quiz.ghost:hover { border-color: var(--navy); }
+  .btn-quiz:disabled { opacity: .4; cursor: default; }
+  .quiz-result { padding: 3rem 2.5rem; text-align: center; display: none; }
+  .result-circle {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: var(--navy); margin: 0 auto 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  .result-score { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--gold); }
+  .result-label { font-size: .72rem; color: rgba(255,255,255,0.55); font-weight: 600; }
+  .result-msg { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: .75rem; }
+  .result-sub { color: var(--gray); font-size: .92rem; margin-bottom: 2rem; line-height: 1.75; font-weight: 400; }
+
+  /* ── STEPS ── */
+  .steps { background: var(--off-white); }
+  .steps-flow { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; gap: 0; }
+  .step-item { position: relative; text-align: center; padding: 0 1rem; }
+  .step-item:not(:last-child)::after {
+    content: '';
+    position: absolute; top: 36px; right: -10px; z-index: 1;
+    width: 20px; height: 2px; background: var(--gold);
+  }
+  .step-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: white; border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin: 0 auto 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    position: relative; z-index: 2;
+  }
+  .step-item h4 { font-weight: 800; font-size: .92rem; color: var(--navy); margin-bottom: .4rem; }
+  .step-item p { font-size: .8rem; color: var(--gray); line-height: 1.6; font-weight: 400; }
+
+  /* ── REFERENCES ── */
+  .references { background: white; }
+  .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 900px; }
+  .ref-card {
+    background: var(--off-white); border-radius: 14px; padding: 1.5rem 1.75rem;
+    border-left: 4px solid var(--navy);
+  }
+  .ref-author { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--navy); font-size: .95rem; margin-bottom: .3rem; }
+  .ref-title { font-size: .88rem; color: #374151; font-style: italic; line-height: 1.6; margin-bottom: .3rem; font-weight: 400; }
+  .ref-year { font-size: .78rem; color: var(--gray); font-weight: 700; }
+
+  /* ── GLOSSARY ── */
+  .glossary { background: var(--off-white); }
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .glossary-item {
+    padding: 1.3rem 1.6rem; border-radius: 12px;
+    background: white; border-left: 4px solid var(--gold);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .glossary-term { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--navy); margin-bottom: .3rem; font-size: .95rem; }
+  .glossary-def { font-size: .88rem; color: #6B7280; line-height: 1.65; font-weight: 400; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); padding: 3.5rem 5rem 2rem;
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem;
+    padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand h3 { font-family: 'Syne', sans-serif; font-weight: 800; color: white; font-size: 1.2rem; margin-bottom: .4rem; }
+  .footer-brand h3 span { color: var(--gold); }
+  .footer-brand p { color: rgba(255,255,255,0.5); font-size: .85rem; line-height: 1.65; max-width: 280px; font-weight: 400; }
+  .footer-credit { text-align: right; }
+  .footer-credit h4 { font-family: 'Syne', sans-serif; color: var(--gold); font-weight: 800; font-size: 1rem; margin-bottom: .3rem; }
+  .footer-credit p { color: rgba(255,255,255,0.55); font-size: .85rem; line-height: 1.65; font-weight: 400; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .copyright { color: rgba(255,255,255,0.35); font-size: .8rem; font-weight: 500; }
+  .copyright strong { color: rgba(255,255,255,0.6); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: .85rem; font-weight: 600; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    section { padding: 3.5rem 1.5rem; }
+    .for-who { padding: 3rem 1.5rem; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .hero-visual { display: none; }
+    .case-layout { grid-template-columns: 1fr; }
+    .gilbert-grid { grid-template-columns: 1fr; }
+    .hpt-diagram { grid-template-columns: 1fr; }
+    .steps-flow { grid-template-columns: 1fr 1fr; }
+    .step-item::after { display: none; }
+    .glossary-grid { grid-template-columns: 1fr; }
+    .ref-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    footer { padding: 2.5rem 1.5rem; }
+    .footer-top { flex-direction: column; }
+    .footer-credit { text-align: left; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">EHP <span>Learning</span></div>
+  <ul class="nav-links">
+    <li><a href="#for-who">For Who</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
+</nav>
+
+<!-- CREDIT BAR -->
+<div class="credit-bar">
+  📚 Created by <strong>Alni Nur Firani</strong> · Learning &amp; Development &amp; Instructional Design · 2026
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">🎯 Engineering Human Performance · 2026</div>
+    <h1>How to <em>Engineer</em><br>Human Performance?</h1>
+    <p class="hero-lead">A systematic, evidence-based approach to analyze performance gaps, identify root causes, and design targeted interventions that transform workplace potential.</p>
+    <div class="hero-actions">
+      <a href="#quiz" class="btn-primary">Try the E-Learning Quiz</a>
+      <a href="#for-who" class="btn-outline">Who is This For?</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Core Steps</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Gilbert Concepts</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Case Studies</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-title">📊 Performance Transformation</div>
+      <div class="progress-item">
+        <div class="progress-label"><span>Knowledge Gap</span><span>Closed ✓</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-label"><span>Skill Competency</span><span>+72%</span></div>
+        <div class="progress-bar"><div class="progress-fill blue" style="width:72%"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-label"><span>Team Productivity</span><span>+90%</span></div>
+        <div class="progress-bar"><div class="progress-fill green" style="width:90%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<div class="for-who" id="for-who">
+  <div class="for-who-inner">
+    <div class="for-who-label">Who This Is For</div>
+    <h2>Selamat Datang, L&D Professionals &amp; Instructional Designers! 👋</h2>
+    <p class="for-who-desc">
+      Halaman ini dirancang khusus untuk kamu yang bekerja di bidang <strong>Learning &amp; Development</strong> dan <strong>Instructional Design</strong> — yang ingin memahami bagaimana cara mendiagnosis masalah performa secara sistematis, bukan langsung lompat ke solusi training. Di sini kamu akan belajar framework, model, dan cara penerapan nyata di lapangan.
+    </p>
+    <div class="audience-chips">
+      <div class="chip">👩‍💼 L&D Professional</div>
+      <div class="chip">🎨 Instructional Designer</div>
+      <div class="chip">📈 HR Business Partner</div>
+      <div class="chip">🏫 Training Manager</div>
+      <div class="chip">🔍 Performance Consultant</div>
+    </div>
+    <div class="how-to-use">
+      <h4>💡 Cara Menggunakan Halaman Ini</h4>
+      <ol>
+        <li>Baca dulu konsep dasar <strong>EHP</strong> dan kenapa penting (bagian "What is EHP" dan "4 Pillars")</li>
+        <li>Pelajari <strong>5 langkah prosesnya</strong> secara berurutan</li>
+        <li>Pahami <strong>HPT Model</strong> dan konsep intervensi dari <strong>Thomas F. Gilbert</strong></li>
+        <li>Coba hubungkan teori ke kenyataan lewat <strong>3 Case Studies</strong> industri nyata</li>
+        <li>Uji pemahamanmu dengan <strong>Interactive Quiz</strong> — langsung ada feedbacknya!</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS -->
+<section class="what-is" id="what-is">
+  <div class="section-header reveal">
+    <div class="section-label">Foundation</div>
+    <h2 class="section-title">What is Engineering Human Performance?</h2>
+    <p class="section-desc">Understanding the systematic methodology that drives real workplace transformation.</p>
+  </div>
+  <div class="definition-box reveal">
+    <div class="def-icon">🔬</div>
+    <div class="def-text">
+      <strong>Engineering Human Performance (EHP)</strong> is a systematic approach employed to analyze performance, identify performance issues' root causes, and design evidence-based solutions to enhance human performance in the workplace. It's not just about training — it's about engineering the right conditions for people to thrive.
+    </div>
+  </div>
+  <div class="transform-flow reveal">
+    <div class="flow-card before">
+      <div class="flow-emoji">😓</div>
+      <h3>From Incompetence</h3>
+      <p>Gaps, frustration, missed targets</p>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-card after">
+      <div class="flow-emoji">🚀</div>
+      <h3>To Competence</h3>
+      <p>Clarity, capability, peak results</p>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars" style="background: white; padding: 5rem;">
+  <div class="section-header reveal">
+    <div class="section-label">Why It Matters</div>
+    <h2 class="section-title">Four Pillars of EHP</h2>
+    <p class="section-desc">The key components that make Engineering Human Performance essential in modern organizations.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">🔍</div>
+      <h3>Performance Analysis</h3>
+      <p>Identifying gaps between expected and actual performance, then determining their underlying causes with precision.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">⚙️</div>
+      <h3>Performance Intervention</h3>
+      <p>Designing, developing, and implementing targeted solutions — from training to technology to process redesign.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">📈</div>
+      <h3>Evaluation</h3>
+      <p>Measuring the effectiveness of interventions to ensure organizational and individual goals are genuinely achieved.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">04</div>
+      <div class="pillar-icon">🔄</div>
+      <h3>Continuous Improvement</h3>
+      <p>Identifying and designing strategies for ongoing learning, adaptation, and sustainable performance growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps" id="steps">
+  <div class="section-header reveal">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">The 5 Steps of EHP</h2>
+    <p class="section-desc">A clear, repeatable process that moves from problem to solution to sustained results.</p>
+  </div>
+  <div class="steps-flow">
+    <div class="step-item reveal">
+      <div class="step-circle">🔍</div>
+      <h4>Performance Analysis</h4>
+      <p>Identify problems or opportunities for performance improvement</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-circle">🌱</div>
+      <h4>Cause Analysis</h4>
+      <p>Dig into root causes of performance issues</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-circle">🧩</div>
+      <h4>Solution Design</h4>
+      <p>Develop targeted interventions to address the issues</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-circle">💡</div>
+      <h4>Implementation</h4>
+      <p>Roll out and execute the designed interventions</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-circle">📊</div>
+      <h4>Evaluation</h4>
+      <p>Measure the effectiveness of what was implemented</p>
+    </div>
+  </div>
+</section>
+
+<!-- HPT MODEL -->
+<section class="hpt" id="hpt">
+  <div class="section-header reveal">
+    <div class="section-label">Theory &amp; Model</div>
+    <h2 class="section-title">The HPT Model</h2>
+    <p class="section-desc">Van Tiem, Moseley &amp; Dessinger (2012) — the gold standard framework for Human Performance Technology.</p>
+  </div>
+  <div class="hpt-diagram reveal">
+    <div class="hpt-phase">
+      <div class="hpt-phase-label">
+        <div class="phase-dot" style="background:var(--gold)"></div>Analysis
+      </div>
+      <ul>
+        <li>GAP analysis — current vs desired state</li>
+        <li>Personal causes: skill, knowledge, motivation</li>
+        <li>Environmental causes: tools, processes, incentives</li>
+      </ul>
+    </div>
+    <div class="hpt-phase">
+      <div class="hpt-phase-label">
+        <div class="phase-dot" style="background:#60A5FA"></div>Intervention Selection
+      </div>
+      <ul>
+        <li>Instructional approach (training, e-learning)</li>
+        <li>Non-instructional approach (job aids, process change)</li>
+        <li>Matching solution to root cause</li>
+      </ul>
+    </div>
+    <div class="hpt-phase">
+      <div class="hpt-phase-label">
+        <div class="phase-dot" style="background:#34D399"></div>Implementation
+      </div>
+      <ul>
+        <li>Partnering &amp; consultation with stakeholders</li>
+        <li>Project management and rollout</li>
+        <li>Communication and change management</li>
+      </ul>
+    </div>
+  </div>
+  <div class="hpt-eval reveal">
+    <div class="hpt-eval-icon">📋</div>
+    <div class="hpt-eval-content">
+      <h4>Evaluation — Connected to All Phases</h4>
+      <p>Evaluation runs throughout the entire process — not just at the end. It continuously informs decisions at every stage of the HPT model.</p>
+      <div class="hpt-eval-tags">
+        <span class="tag">Formative</span>
+        <span class="tag">Summative</span>
+        <span class="tag">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GILBERT CONCEPTS -->
+<section id="gilbert" style="background: white; padding: 5rem;">
+  <div class="section-header reveal">
+    <div class="section-label">Gilbert's Framework</div>
+    <h2 class="section-title">Human Performance Intervention Concepts</h2>
+    <p class="section-desc">Thomas F. Gilbert's four instructional interventions for learning and development — summarized with real intervention examples.</p>
+  </div>
+  <div class="gilbert-grid">
+    <div class="gilbert-card reveal">
+      <div class="gilbert-icon-wrap">📋</div>
+      <div>
+        <div class="gilbert-title">Information</div>
+        <div class="gilbert-concept">Providing clear information about job tasks and expectations so employees know what's expected of them.</div>
+        <div class="intervention-label">Intervention Example</div>
+        <div class="intervention-text">Guidelines or documentation with detailed steps and work procedures</div>
+      </div>
+    </div>
+    <div class="gilbert-card reveal">
+      <div class="gilbert-icon-wrap">⚡</div>
+      <div>
+        <div class="gilbert-title">Empowerment</div>
+        <div class="gilbert-concept">Granting employees responsibility and autonomy in their work to boost ownership and quality of decisions.</div>
+        <div class="intervention-label">Intervention Example</div>
+        <div class="intervention-text">Training and support to help employees make confident, independent decisions</div>
+      </div>
+    </div>
+    <div class="gilbert-card reveal">
+      <div class="gilbert-icon-wrap">🏗️</div>
+      <div>
+        <div class="gilbert-title">Job Design</div>
+        <div class="gilbert-concept">Organizing job tasks to align with the abilities and skills of employees for optimal fit and performance.</div>
+        <div class="intervention-label">Intervention Example</div>
+        <div class="intervention-text">Modifying task structures or responsibilities to match individual skills and strengths</div>
+      </div>
+    </div>
+    <div class="gilbert-card reveal">
+      <div class="gilbert-icon-wrap">🎓</div>
+      <div>
+        <div class="gilbert-title">Education &amp; Training</div>
+        <div class="gilbert-concept">Providing the knowledge and skills needed to perform tasks effectively and grow professionally.</div>
+        <div class="intervention-label">Intervention Example</div>
+        <div class="intervention-text">Training programs tailored to the specific needs of individuals or groups</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-study" id="case-study">
+  <div class="section-header reveal">
+    <div class="section-label">Real-World Application</div>
+    <h2 class="section-title">Case Studies</h2>
+    <p class="section-desc">See how Engineering Human Performance is applied across different industries — and how cause analysis changes the entire solution strategy.</p>
+  </div>
+  <div class="case-tabs">
+    <button class="case-tab active" onclick="showCase(0,this)">🏥 Healthcare</button>
+    <button class="case-tab" onclick="showCase(1,this)">🏭 Manufacturing</button>
+    <button class="case-tab" onclick="showCase(2,this)">💼 Tech Startup</button>
+  </div>
+
+  <!-- Case 1 -->
+  <div class="case-content active" id="case-0">
+    <div class="case-layout">
+      <div class="case-box">
+        <h4>📋 Situation</h4>
+        <ul>
+          <li><span class="li-dot"></span>A regional hospital noticed medication error rates were 3× above the national benchmark</li>
+          <li><span class="li-dot"></span>Staff blamed overwork; management blamed lack of training</li>
+          <li><span class="li-dot"></span>Previous training-only approach had shown no measurable improvement</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>🔍 EHP Analysis Found</h4>
+        <ul>
+          <li><span class="li-dot"></span>Root cause: unclear labeling + shift handoff communication gaps — NOT a skill deficit</li>
+          <li><span class="li-dot"></span>Only 20% of errors were skill-related; 80% were environmental/process issues</li>
+          <li><span class="li-dot"></span>Nurses had knowledge but lacked clear information and standardized procedures</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>⚙️ Interventions Designed</h4>
+        <ul>
+          <li><span class="li-dot"></span><strong>Information:</strong> Redesigned medication labels + digital checklist at point-of-care</li>
+          <li><span class="li-dot"></span><strong>Job Design:</strong> Restructured shift handoff protocol with mandatory verbal + written confirmation</li>
+          <li><span class="li-dot"></span><strong>Training:</strong> 2-hour focused module only for the 20% skill-based gap</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>📈 Results After 6 Months</h4>
+        <div class="outcome-grid">
+          <div class="outcome-item"><div class="outcome-num">67%</div><div class="outcome-desc">Reduction in medication errors</div></div>
+          <div class="outcome-item"><div class="outcome-num">3h</div><div class="outcome-desc">Saved per nurse per week</div></div>
+          <div class="outcome-item"><div class="outcome-num">94%</div><div class="outcome-desc">Staff satisfaction increase</div></div>
+          <div class="outcome-item"><div class="outcome-num">$2M</div><div class="outcome-desc">Estimated cost avoidance</div></div>
+        </div>
+      </div>
+      <div class="case-highlight">
+        <div class="case-highlight-icon">💡</div>
+        <p><strong style="color:var(--gold)">Key Lesson:</strong> EHP revealed that training was NOT the solution — process redesign and information clarity were. Without proper cause analysis, the hospital would have wasted resources on ineffective training.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 2 -->
+  <div class="case-content" id="case-1">
+    <div class="case-layout">
+      <div class="case-box">
+        <h4>📋 Situation</h4>
+        <ul>
+          <li><span class="li-dot"></span>Electronics factory saw a 22% increase in product defects over two quarters</li>
+          <li><span class="li-dot"></span>Production manager wanted a week-long technical retraining for all 200+ workers</li>
+          <li><span class="li-dot"></span>Budget was approved, but similar past training had produced poor results</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>🔍 EHP Analysis Found</h4>
+        <ul>
+          <li><span class="li-dot"></span>New machinery introduced 3 months ago had inconsistent calibration settings</li>
+          <li><span class="li-dot"></span>Workers were never shown updated quality tolerances for new component specs</li>
+          <li><span class="li-dot"></span>Incentive system was rewarding speed over accuracy</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>⚙️ Interventions Designed</h4>
+        <ul>
+          <li><span class="li-dot"></span><strong>Environmental:</strong> Fixed calibration + daily machine audit checklist</li>
+          <li><span class="li-dot"></span><strong>Information:</strong> Visual quality spec cards posted at each workstation</li>
+          <li><span class="li-dot"></span><strong>Empowerment:</strong> Workers given authority to stop the line for suspected defects</li>
+          <li><span class="li-dot"></span><strong>Incentives:</strong> Restructured bonus tied to quality score, not pure output speed</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>📈 Results After 3 Months</h4>
+        <div class="outcome-grid">
+          <div class="outcome-item"><div class="outcome-num">89%</div><div class="outcome-desc">Reduction in defect rate</div></div>
+          <div class="outcome-item"><div class="outcome-num">15%</div><div class="outcome-desc">Productivity increase</div></div>
+          <div class="outcome-item"><div class="outcome-num">$0</div><div class="outcome-desc">Training budget spent (saved!)</div></div>
+          <div class="outcome-item"><div class="outcome-num">2wk</div><div class="outcome-desc">Time to see improvement</div></div>
+        </div>
+      </div>
+      <div class="case-highlight">
+        <div class="case-highlight-icon">💡</div>
+        <p><strong style="color:var(--gold)">Key Lesson:</strong> A proposed $80,000 retraining program was replaced by low-cost environmental and process interventions. EHP's cause analysis saved the company both money and time — with dramatically better outcomes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 3 -->
+  <div class="case-content" id="case-2">
+    <div class="case-layout">
+      <div class="case-box">
+        <h4>📋 Situation</h4>
+        <ul>
+          <li><span class="li-dot"></span>A 50-person SaaS startup had high developer turnover (40% annual churn)</li>
+          <li><span class="li-dot"></span>Exit interviews cited "unclear role expectations" and "no growth path"</li>
+          <li><span class="li-dot"></span>HR proposed a compensation increase; leadership wanted a culture overhaul</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>🔍 EHP Analysis Found</h4>
+        <ul>
+          <li><span class="li-dot"></span>No formal onboarding — new hires took 4+ months to reach productivity</li>
+          <li><span class="li-dot"></span>Role scopes were ambiguous; developers frequently did tasks outside their expertise</li>
+          <li><span class="li-dot"></span>Zero feedback loops — employees had no sense of how they were performing</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>⚙️ Interventions Designed</h4>
+        <ul>
+          <li><span class="li-dot"></span><strong>Information:</strong> Clear job descriptions and 90-day onboarding roadmap</li>
+          <li><span class="li-dot"></span><strong>Job Design:</strong> Aligned tasks to developer specialization; formed cross-functional pods</li>
+          <li><span class="li-dot"></span><strong>Empowerment:</strong> Monthly 1-on-1 feedback + individual development plans</li>
+          <li><span class="li-dot"></span><strong>Training:</strong> Bi-weekly internal knowledge sharing sessions</li>
+        </ul>
+      </div>
+      <div class="case-box">
+        <h4>📈 Results After 12 Months</h4>
+        <div class="outcome-grid">
+          <div class="outcome-item"><div class="outcome-num">12%</div><div class="outcome-desc">Turnover dropped from 40%</div></div>
+          <div class="outcome-item"><div class="outcome-num">2×</div><div class="outcome-desc">Faster time-to-productivity</div></div>
+          <div class="outcome-item"><div class="outcome-num">4.6★</div><div class="outcome-desc">Glassdoor rating (was 3.1)</div></div>
+          <div class="outcome-item"><div class="outcome-num">31%</div><div class="outcome-desc">Feature delivery speed increase</div></div>
+        </div>
+      </div>
+      <div class="case-highlight">
+        <div class="case-highlight-icon">💡</div>
+        <p><strong style="color:var(--gold)">Key Lesson:</strong> The real issue wasn't pay — it was lack of information, unclear job design, and no empowerment structures. EHP's systematic approach identified the true causes and led to targeted, cost-effective solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="elearning" id="quiz">
+  <div class="section-header reveal" style="text-align:center; max-width: 620px; margin: 0 auto 3rem;">
+    <div class="section-label">Interactive E-Learning</div>
+    <h2 class="section-title">Test Your Knowledge</h2>
+    <p class="section-desc">5 soal untuk mengecek pemahamanmu tentang konsep Engineering Human Performance. Langsung ada feedback dan penjelasannya!</p>
+  </div>
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <h3>🎯 EHP Knowledge Check</h3>
+      <div class="quiz-progress-wrap">
+        <span class="quiz-progress-text" id="q-progress">Question 1 of 5</span>
+        <div class="quiz-bar"><div class="quiz-bar-fill" id="q-bar" style="width:20%"></div></div>
+      </div>
+    </div>
+    <div class="quiz-body" id="quiz-body">
+      <div class="quiz-q-num" id="q-num">Question 01</div>
+      <div class="quiz-question" id="q-text"></div>
+      <div class="quiz-options" id="q-options"></div>
+      <div class="quiz-feedback" id="q-feedback"></div>
+    </div>
+    <div class="quiz-result" id="quiz-result">
+      <div class="result-circle">
+        <div class="result-score" id="result-score">0/5</div>
+        <div class="result-label">Score</div>
+      </div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-sub" id="result-sub"></div>
+      <button class="btn-quiz" onclick="restartQuiz()">🔄 Try Again</button>
+    </div>
+    <div class="quiz-footer" id="quiz-footer">
+      <span class="score-badge">⭐ Score: <span id="live-score">0</span> / 5</span>
+      <div class="quiz-nav">
+        <button class="btn-quiz ghost" id="btn-prev" onclick="prevQ()" disabled>← Prev</button>
+        <button class="btn-quiz" id="btn-next" onclick="nextQ()">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section class="references" id="references">
+  <div class="section-header reveal">
+    <div class="section-label">Academic References</div>
+    <h2 class="section-title">Referensi Teori</h2>
+    <p class="section-desc">Konten dalam halaman ini didasarkan pada teori dan model dari para ahli berikut. Untuk pemahaman lebih dalam, silakan baca sumber aslinya.</p>
+  </div>
+  <div class="ref-grid reveal">
+    <div class="ref-card">
+      <div class="ref-author">Van Tiem, D., Moseley, J., &amp; Dessinger, J.</div>
+      <div class="ref-title">Fundamentals of Performance Improvement: Optimizing Results Through People, Process, and Organizations (3rd ed.)</div>
+      <div class="ref-year">📅 2012 · International Society for Performance Improvement (ISPI) · Pfeiffer/Wiley</div>
+    </div>
+    <div class="ref-card">
+      <div class="ref-author">Gilbert, T. F.</div>
+      <div class="ref-title">Human Competence: Engineering Worthy Performance</div>
+      <div class="ref-year">📅 1978 (Tribute Ed. 1996) · ISPI &amp; McGraw-Hill · Dasar dari konsep intervensi performa</div>
+    </div>
+    <div class="ref-card">
+      <div class="ref-author">Mager, R. F., &amp; Pipe, P.</div>
+      <div class="ref-title">Analyzing Performance Problems, or You Really Oughta Wanna (3rd ed.)</div>
+      <div class="ref-year">📅 1997 · CEP Press · Framework untuk analisis akar masalah performa</div>
+    </div>
+    <div class="ref-card">
+      <div class="ref-author">Rothwell, W. J.</div>
+      <div class="ref-title">ASTD Handbook of Improving Performance in the Workplace: Instructional Design and Training Delivery</div>
+      <div class="ref-year">📅 2010 · American Society for Training &amp; Development (ATD/ASTD)</div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section class="glossary" id="glossary">
+  <div class="section-header reveal">
+    <div class="section-label">Reference</div>
+    <h2 class="section-title">Key Terms Glossary</h2>
+    <p class="section-desc">Quick reference for essential Engineering Human Performance terminology.</p>
+  </div>
+  <div class="glossary-grid">
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Engineering Human Performance (EHP)</div>
+      <div class="glossary-def">A systematic approach to analyze, diagnose, and improve human performance in the workplace through evidence-based interventions.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Performance Gap</div>
+      <div class="glossary-def">The difference between the expected (desired) level of performance and the actual (current) level of performance.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Root Cause Analysis</div>
+      <div class="glossary-def">A method for identifying the underlying cause(s) of a performance problem, rather than just addressing surface-level symptoms.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Performance Intervention</div>
+      <div class="glossary-def">A deliberate action designed to close a performance gap — ranging from training programs to environmental or structural redesign.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">HPT Model</div>
+      <div class="glossary-def">Human Performance Technology Model (Van Tiem et al., 2012) — a framework covering Analysis, Intervention Selection, Implementation, and Evaluation.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Instructional Intervention</div>
+      <div class="glossary-def">Solutions that address skill or knowledge deficits, such as training programs, e-learning modules, coaching, or mentoring.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Non-Instructional Intervention</div>
+      <div class="glossary-def">Solutions that address environmental or organizational factors — process redesign, job aids, incentives, or structural changes.</div>
+    </div>
+    <div class="glossary-item reveal">
+      <div class="glossary-term">Formative Evaluation</div>
+      <div class="glossary-def">Ongoing evaluation conducted during the design and implementation process to make real-time improvements to the intervention.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>EHP <span>Learning</span></h3>
+      <p>A free e-learning resource on Engineering Human Performance, designed for L&amp;D professionals and Instructional Designers who want to go beyond training.</p>
+    </div>
+    <div class="footer-credit">
+      <h4>© Alni Nur Firani · 2026</h4>
+      <p>Learning &amp; Development Specialist<br>Instructional Designer<br>
+      Connect on <a href="https://linkedin.com" style="color:var(--gold);font-weight:700;">LinkedIn</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="copyright">
+      © 2026 <strong>Alni Nur Firani</strong>. All rights reserved. Content based on peer-reviewed L&amp;D theory and academic sources.
+    </div>
+    <div class="footer-links">
+      <a href="#home">Back to Top ↑</a>
+      <a href="#references">References</a>
+      <a href="#quiz">Take the Quiz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "A manager notices that customer service reps are giving inconsistent answers to customers. Before designing any solution, what should you do FIRST according to EHP principles?",
+    opts: ["Launch a training program immediately", "Conduct a performance analysis to identify the gap and its root causes", "Hire new staff who are better qualified", "Ask the reps to work harder and follow the SOP"],
+    correct: 1,
+    feedback: "✅ Correct! EHP always begins with Performance Analysis — understanding the gap between expected and actual performance before jumping to any solution. Training without analysis is a common (and costly) mistake in L&D."
+  },
+  {
+    q: "You discover that sales reps aren't using the new CRM system. Investigation reveals they were never shown HOW it works or what procedures to follow. According to Gilbert's framework, which intervention type fits best?",
+    opts: ["Empowerment — give them more responsibility and decision-making authority", "Job Design — restructure their roles to match their skills", "Information — provide clear documentation, guidelines, and work procedures", "Evaluation — measure their performance more strictly with KPIs"],
+    correct: 2,
+    feedback: "✅ Correct! When employees lack clear information about how to do their jobs (knowledge of what/how/when), Gilbert recommends Information interventions — like SOPs, job aids, or structured documentation. The problem here is not skill, it's missing information."
+  },
+  {
+    q: "In the HPT Model by Van Tiem, Moseley & Dessinger (2012), how is Evaluation positioned within the framework?",
+    opts: ["Only at the end of a project, after full implementation is complete", "Only connected to the Analysis phase to validate the gap", "Continuously throughout all phases — analysis, intervention selection, and implementation", "It replaces the need for cause analysis when data is available"],
+    correct: 2,
+    feedback: "✅ Correct! Evaluation in the HPT model is both formative (ongoing, during the process) AND summative (end-of-project). It connects to every phase to continuously guide and improve the performance improvement process."
+  },
+  {
+    q: "A performance analysis reveals that employees KNOW how to do a task correctly but still aren't performing it well in practice. What does this most likely suggest about the root cause?",
+    opts: ["A skill or knowledge deficit that requires training intervention", "An environmental or motivational factor — not a training issue", "Poor hiring decisions that cannot be corrected by L&D", "The task is too complex and should be automated or eliminated"],
+    correct: 1,
+    feedback: "✅ Correct! If employees already know HOW to do something but still don't perform correctly, the cause is almost always environmental — unclear expectations, lack of feedback, missing tools, wrong incentives, or resource constraints. Training would NOT solve this and would waste budget."
+  },
+  {
+    q: "A company spends $100,000 on a 2-week technical training program. Three months later, performance metrics haven't improved at all. What does EHP suggest most likely happened?",
+    opts: ["The trainers were not experienced enough to deliver the content effectively", "Training was implemented without cause analysis — the actual root cause may not have been a skill gap", "Employees simply didn't put in enough effort after the training program", "The training needed to be longer — at least 4 weeks to be effective"],
+    correct: 1,
+    feedback: "✅ Correct! This is the classic trap EHP is designed to avoid. Without cause analysis, organizations default to training even when the real issues are environmental, structural, or motivational. This is called 'training as a default solution' — and it's what separates good L&D practitioners from great ones."
+  }
+];
+
+let currentQ = 0, score = 0;
+let answered = new Array(5).fill(false);
+let selectedAnswers = new Array(5).fill(-1);
+
+function renderQ() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = 'Question ' + String(currentQ + 1).padStart(2, '0');
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-progress').textContent = 'Question ' + (currentQ + 1) + ' of 5';
+  document.getElementById('q-bar').style.width = (((currentQ + 1) / 5) * 100) + '%';
+
+  const optContainer = document.getElementById('q-options');
+  optContainer.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = '<span class="opt-letter">' + letters[i] + '</span>' + opt;
+    if (answered[currentQ]) {
+      btn.classList.add('disabled');
+      if (i === q.correct) btn.classList.add('correct');
+      else if (i === selectedAnswers[currentQ] && i !== q.correct) btn.classList.add('wrong');
+    } else {
+      btn.onclick = () => selectAnswer(i);
+    }
+    optContainer.appendChild(btn);
+  });
+
+  const fb = document.getElementById('q-feedback');
+  if (answered[currentQ]) {
+    const isCorrect = selectedAnswers[currentQ] === q.correct;
+    fb.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'wrong');
+    fb.textContent = isCorrect ? q.feedback : '❌ Not quite. ' + q.feedback;
+  } else {
+    fb.className = 'quiz-feedback';
+    fb.textContent = '';
+  }
+
+  document.getElementById('btn-prev').disabled = currentQ === 0;
+  document.getElementById('btn-next').textContent = currentQ === 4 ? 'See Results →' : 'Next →';
+  document.getElementById('live-score').textContent = score;
+}
+
+function selectAnswer(idx) {
+  if (answered[currentQ]) return;
+  answered[currentQ] = true;
+  selectedAnswers[currentQ] = idx;
+  if (idx === questions[currentQ].correct) score++;
+  renderQ();
+}
+
+function nextQ() {
+  if (currentQ === 4) { showResult(); return; }
+  currentQ++; renderQ();
+}
+function prevQ() { if (currentQ > 0) { currentQ--; renderQ(); } }
+
+function showResult() {
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-footer').style.display = 'none';
+  const res = document.getElementById('quiz-result');
+  res.style.display = 'block';
+  document.getElementById('result-score').textContent = score + '/5';
+  let msg, sub;
+  if (score === 5) { msg = "🏆 Perfect Score!"; sub = "Luar biasa! Kamu sudah menguasai konsep EHP dengan sangat baik. Siap diterapkan di pekerjaan!"; }
+  else if (score >= 3) { msg = "👏 Great Work!"; sub = "Pemahaman yang bagus! Coba review case study dan HPT model untuk memperdalam pemahamanmu."; }
+  else { msg = "📚 Keep Learning!"; sub = "Jangan menyerah! Baca ulang materi di atas, khususnya HPT Model dan konsep Gilbert, lalu coba lagi."; }
+  document.getElementById('result-msg').textContent = msg;
+  document.getElementById('result-sub').textContent = sub;
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0;
+  answered = new Array(5).fill(false);
+  selectedAnswers = new Array(5).fill(-1);
+  document.getElementById('quiz-body').style.display = 'block';
+  document.getElementById('quiz-footer').style.display = 'flex';
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQ();
+}
+
+function showCase(idx, btn) {
+  document.querySelectorAll('.case-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.case-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('case-' + idx).classList.add('active');
+  btn.classList.add('active');
+}
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+renderQ();
+</script>
+</body>
+</html>
